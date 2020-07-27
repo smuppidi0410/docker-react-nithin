@@ -1,25 +1,22 @@
 language: generic
-
 sudo: required
-
 services:
-    - docker
-
+- docker
 before_install:
-    - docker build -t nithin/docker-react-nithin -f Dockerfile.dev .
-
+- docker build -t nithin/docker-react-nithin -f Dockerfile.dev .
 script:
-    - docker run -e CI=true nithin/docker-react-nithin npm run test
-
+- docker run -e CI=true nithin/docker-react-nithin npm run test
 deploy:
-    provider: elasticbeanstalk
-    region: "us-east-1"
-    app: "docker-react-nithin"
-    env: "DockerReactNithin-env"
-    bucket_name: "arn:aws:s3:::elasticbeanstalk-us-east-1-615254007828"
-    bucket_path: "docker-react-nithin"
-    on:
-        branch: master
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    skip_cleanup: true
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: docker-react-nithin
+  env: DockerReactNithin-env
+  bucket_name: arn:aws:s3:::elasticbeanstalk-us-east-1-615254007828
+  bucket_path: docker-react-nithin
+  on:
+    branch: master
+  access_key_id:
+    secure: cZMNvNuU0cVO8Om6d0361YOEccYmALPCQvuNy3GjvIvM8b9yG+2pKjOYJB1oN6fwAx5suMDcbPE6R+2BzdYhQQVcdBYjsuqaou4FOxGgMw9k7q0RCNLfZevZp7J54OZnfg+vICcLLNWZu/FncEmhQ7lU7lOdLSRWSPoN/L1idn851ONSBnPH5WK/OTwJXkvP+q/D7D+Qx8n+lqaIyUJXQGYHzQR0e4H5BbS1ZYorpbBjVcEgtEnWz+nkRY5UnDnvJ1kgxItyhWwdSE8u/hdJi05KN0i4oa3ZQ7L0PoaFAHtOOKuATPyS4+1AWwM6Npd/UxBl8GWRqZpjjXfr8WY/HWTbBvrAL8KnlCVBf73IStmIRVPXiFOTEvYpLdOhY7hAp9hhcetHTyFrr0jGJ+GQTcRa5Yx75rEsB1vo7qJKf/6fJItC14GdYU+koWm21z8asuKFcSygeOA9YXWiVosuCQiaE3HWF4WbNw5u++Rz6rrSuAjzO1HCaOsWWtm5XYj3oTwMWdqoudiX8FQSHaYFr02eqWtv9IH3bPXTp6EZCnmLhbZaBwX7zS3+rNcwxB2XSq71PETvbprF0wlj+JXC417pv7K4AslrtpjUeX8nOzz4cqH5PivPl/Lb6CPVlQJ6Ved1PASqmc9Z51cBAU9LPN5VOQ8oNeuOkmiZhelJkmk=
+  secret_access_key:
+    secure: PM5x5nOUUeTu+eTg6MjmA3D3CkMkMwYCyoyHT7PidZcAFmDAefElSV8/+r+P2IFn8Gj8JwdizLLMj9SL+bSvWKC5+axdiQHQoDcwjhu+Vhbc7DBj0aB+siX37zcAg7rLR8U+qZVBesvtkJ7DQjfbQ/rcuvUSWrudyWYr7i9miB5RhfGJgeCrDACkllsrZAWKx0WW27eZOf+mqgdHpb83n5ucUUNv4VluIZJzY5hhCMSXlAxw0v9mCtRDpfjRo/jtXWdYzdscq9pvYhsrCW2RZALMMDDKsVbKfvrXkZp48sNUcXcQpbsXvkbtvhFb+YWLLHzPyMaUUtkUMETOx6vemoWVYmvq0G+4Fw1kCN/LcoO226HgdZ0mRZNrgXWVaCaO2NzZ/PIZOFxm5mrWk1XMkJuDeKva7pHuvRONRPfJcjVh20jf0Tt2M88MieNTlKqfTUpa4hUGyj6kZx+vJLQSQ2MStrwNkVmz1resU0D98IIB22CULwpAsAcPsrKbfQVcUFVB91PjRnu3z6EX53ebrVhB+AEhjpxyC4TunKe778YZ5d89HWaHBwMXJRwK1uMSikyTPxTC8wwNZLZDGOK/oqxwIdG/AseqDEJp60oWQNoDXcDuhEu7cx3cg1E/Q+pcoFPYGOBkOyix0FUG1WKjjMcL3DnCtngm5CUf7Euf4as=
+  skip_cleanup: true
